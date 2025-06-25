@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/styleadmin.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="/css_template/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Glavni sadržaj -->
+<div class="content">
+  <header class="bg-nav flex justify-between p-3">
+    <div class="nav-container">
+      <div class="flex items-center">
+        <h1 class="text-white ml-3">Admin</h1>
+      </div>
+      <form action="/logout" method="post">
+        <button type="submit" class="bg-grey-dark text-white py-1 px-2 rounded-full">Odjava</button>
+      </form>
+
+    </div>
+  </header>
+
+  <main class="bg-white-300 flex-1 p-3 overflow-hidden">
+    <!-- Statistika -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <div class="shadow bg-warning border-l-8 border-warning-dark p-4 w-1/4">
+        <span class="text-white text-2xl" th:text="${users.size()}"></span>
+        <p class="text-white text-lg">Broj korisnika</p>
+      </div>
+      <div class="shadow bg-success border-l-8 border-success-dark p-4 w-1/4">
+        <span class="text-white text-2xl" th:text="${concerts.size()}">0</span>
+        <p class="text-white text-lg">Broj koncerata</p>
+      </div>
+    </div>
+
+    <!-- Tablica korisnika -->
+    <div class="rounded shadow bg-white mt-4 p-4">
+      <h2 class="font-bold text-xl mb-3">Korisnici</h2>
+      <table class="w-full border-collapse">
+        <thead>
+        <tr class="bg-grey-dark text-white">
+          <th>ID</th>
+          <th>Korisničko ime</th>
+          <th>Email</th>
+          <th>Uloga</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.username}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.role}"></td>
+          <td>
+            <form th:action="@{'/admin/delete/' + ${user.id}}" method="post">
+              <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded-full">Obriši</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tablica koncerata -->
+    <div class="rounded shadow bg-white mt-4 p-4">
+      <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+        <h2 class="font-bold text-xl m-0">Koncerti</h2>
+        <a href="/admin/addConcert" style="margin-left:1150px;" class="bg-green-500 text-white py-1 px-3 rounded-full inline-block">Dodaj koncert</a>
+      </div>
+      <table class="w-full border-collapse">
+        <thead>
+        <tr class="bg-grey-dark text-white">
+          <th>ID</th>
+          <th>Naziv</th>
+          <th>Datum</th>
+          <th>Lokacija</th>
+          <th>Grad</th>
+          <th>Cijena ulaznica</th>
+          <th>Broj ulaznica</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="concert : ${concerts}">
+          <td th:text="${concert.id}"></td>
+          <td th:text="${concert.artist}"></td>
+          <td th:text="${#temporals.format(concert.date, 'dd.MM.yyyy')}"></td>
+          <td th:text="${concert.venue}"></td>
+          <td th:text="${concert.city}"></td>
+          <td th:text="${concert.ticketPrice}"></td>
+          <td th:text="${concert.availableTickets}"></td>
+          <td class="flex items-center gap-2">
+            <form th:action="@{'/admin/deleteConcert/' + ${concert.id}}" method="post">
+              <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded-full">Obriši</button>
+            </form>
+            <a th:href="@{'/admin/editConcert/' + ${concert.id}}" class="bg-blue-500 text-white py-1 px-2 rounded-full">Uredi</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="mt-4 p-2 text-center">
+  <p>LiveVibe. Kristina Đukić</p>
+</footer>
+
+
+</body>
+</html>

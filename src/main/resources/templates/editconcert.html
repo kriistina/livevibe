@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Uredi koncert</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- koristi login stil -->
+</head>
+<body>
+<section>
+    <form th:action="@{/admin/editConcert}" th:object="${concert}" method="post">
+        <h1>Uredi koncert</h1>
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{imageUrl}"/>
+
+        <div class="inputbox">
+            <input type="text" th:field="*{artist}" required>
+            <label>Izvođač</label>
+        </div>
+
+        <div class="inputbox">
+            <input type="date" th:field="*{date}" required>
+            <label>Datum</label>
+        </div>
+
+        <div class="inputbox">
+            <input type="text" th:field="*{venue}" required>
+            <label>Mjesto</label>
+        </div>
+
+        <div class="inputbox">
+            <input type="text" th:field="*{city}" required>
+            <label>Grad</label>
+        </div>
+
+        <div class="inputbox">
+            <input type="number" step="0.01" th:field="*{ticketPrice}" required>
+            <label>Cijena</label>
+        </div>
+
+        <div class="inputbox">
+            <input type="number" th:field="*{availableTickets}" required>
+            <label>Broj ulaznica</label>
+        </div>
+
+        <button type="submit">Spremi</button>
+
+        <div class="register">
+            <p><a href="/admin">Natrag</a></p>
+        </div>
+    </form>
+</section>
+</body>
+</html>

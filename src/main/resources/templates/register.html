@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registracija</title>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<section>
+  <form id="signup-form">
+    <h1>Registracija</h1>
+    <div class="inputbox">
+      <ion-icon name="person-outline"></ion-icon>
+      <input type="text" id="username" name="username" required>
+      <label for="username">Ime</label>
+    </div>
+    <div class="inputbox">
+      <ion-icon name="mail-outline"></ion-icon>
+      <input type="email" id="email" name="email" required>
+      <label for="email">Email</label>
+    </div>
+    <div class="inputbox">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+      <input type="password" id="password" name="password" required>
+      <label for="password">Lozinka</label>
+    </div>
+    <div class="inputbox">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+      <input type="password" id="passwordcon" name="passwordcon" required>
+      <label for="passwordcon">Potvrdi lozinku</label>
+    </div>
+    <button id="submit" type="button">Registracija</button>
+    <div class="register">
+      <p>Imate račun? <a href="/login">Prijava</a></p>
+    </div>
+  </form>
+</section>
+</body>
+<script>
+  const submitButton = document.getElementById("submit");
+
+  submitButton.addEventListener('click', () => {
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('passwordcon').value;
+
+    if (password === confirmPassword) {
+      const data = { username, email, password };
+
+      fetch('/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+              .then(response => {
+                if (response.ok) {
+                  alert('Registracija uspješna!');
+                  window.location.href = '/login';
+                } else {
+                  alert('Registracija nije uspjela. Provjerite podatke i pokušajte ponovno.');
+                }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+                alert('Došlo je do greške. Pokušajte ponovno.');
+              });
+    } else {
+      alert('Lozinke se ne podudaraju. Pokušajte ponovno.');
+    }
+  });
+</script>
+</html>
