@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: livevibe_pass
     volumes:
       - livevibe_data:/var/lib/mysql
+      - livevibe_livevibe_data:/var/lib/mysql
     restart: always
     networks:
       - livevibe-network
@@ -30,7 +31,11 @@ services:
       - livevibe-network
 
 volumes:
+<<<<<<< HEAD
   livevibe_data:
+=======
+  livevibe_livevibe_data:
+>>>>>>> 9766b43c35ab08a459236f6040a9f258fe8ec28c
 
 networks:
   livevibe-network:

@@ -9,7 +9,6 @@ LiveVibe je Spring Boot aplikacija za prodaju i pregled koncerata s MySQL bazom 
 - MySQL 8
 - Docker, Docker Compose
 
----
 
 ## Kako pokrenuti aplikaciju lokalno ili na serveru (npr. Oracle Cloud VM)
 
@@ -22,3 +21,6 @@ LiveVibe je Spring Boot aplikacija za prodaju i pregled koncerata s MySQL bazom 
 1. SSH na server (ili lokalno ako testiraš):
    ```bash
    ssh -i ~/.ssh/id_rsa ubuntu@<IP-adresa-servera>
+=======
+# livevibe
+>>>>>>> 9766b43c35ab08a459236f6040a9f258fe8ec28c
