@@ -6,6 +6,8 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
 <section>
@@ -38,6 +40,7 @@
   </form>
 </section>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   const submitButton = document.getElementById("submit");
 
@@ -59,19 +62,41 @@
       })
               .then(response => {
                 if (response.ok) {
-                  alert('Registracija uspješna!');
-                  window.location.href = '/login';
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Registracija uspješna!',
+                    text: 'Možete se sada prijaviti.',
+                    confirmButtonText: 'U redu'
+                  }).then(() => {
+                    window.location.href = '/login';
+                  });
                 } else {
-                  alert('Registracija nije uspjela. Provjerite podatke i pokušajte ponovno.');
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Greška',
+                    text: 'Registracija nije uspjela. Provjerite podatke i pokušajte ponovno.',
+                    confirmButtonText: 'U redu'
+                  });
                 }
               })
               .catch(error => {
                 console.error('Error:', error);
-                alert('Došlo je do greške. Pokušajte ponovno.');
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Greška',
+                  text: 'Došlo je do greške. Pokušajte ponovno.',
+                  confirmButtonText: 'U redu'
+                });
               });
     } else {
-      alert('Lozinke se ne podudaraju. Pokušajte ponovno.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Lozinke se ne podudaraju',
+        text: 'Pokušajte ponovno.',
+        confirmButtonText: 'U redu'
+      });
     }
   });
 </script>
+
 </html>

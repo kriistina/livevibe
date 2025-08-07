@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/register", "/auth/register", "/auth/register-admin", "/css/**", "/js/**").permitAll();
+                    registry.requestMatchers("/login","/register", "/auth/register", "/auth/register-admin", "/css/**", "/js/**").permitAll();
                     registry.requestMatchers("/admin/**").hasAuthority("ADMIN");  // Ensure that only admins can access the admin page
                     registry.requestMatchers("/").permitAll();  // Allow all users to access home and about pages
                     registry.anyRequest().authenticated();  // Authenticate other requests

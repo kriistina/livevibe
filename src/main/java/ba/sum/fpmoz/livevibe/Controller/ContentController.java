@@ -25,7 +25,7 @@ public class ContentController {
     }
 
     // Početna stranica - svi koncerti ("/" i "/index")
-    @GetMapping({"/", "/index"})
+    @GetMapping({ "/", "/index" })
     public String prikaziNaslovnu(Model model, @ModelAttribute("successMessage") String successMessage) {
         List<Concert> concerts = concertService.getAllConcerts();
         model.addAttribute("concerts", concerts);
